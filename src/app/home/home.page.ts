@@ -1,12 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ArticleService } from 'src/service/article.service';
+import { Article } from 'src/model/Aricle';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor() {}
+  articles: Article[];
 
+  constructor(private articleService: ArticleService) {}
+
+  ngOnInit(): void {
+    this.articleService.getArticles()
+      .subscribe((articles: Article[]) => {
+        console.log('okokok')
+        console.log(JSON.stringify(articles));
+        this.articles = articles;
+    }, 
+    error => console.log(JSON.stringify(error)));
+  }
 }
