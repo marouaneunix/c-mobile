@@ -15,11 +15,6 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
     this.articleService.getArticles()
-      .subscribe((articles: Article[]) => {
-        console.log('okokok')
-        console.log(JSON.stringify(articles));
-        this.articles = articles;
-    }, 
-    error => console.log(JSON.stringify(error)));
+      .subscribe((articles: Article[]) => { this.articles = articles; }, error => console.log(JSON.stringify(error)));
   }
 }
